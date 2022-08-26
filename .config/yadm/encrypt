@@ -1,0 +1,5 @@
+.ssh/id_rsa
+.ssh/id_rsa.pub
+.ssh/config
+.ssh/config.d/*
+.git-credentials
