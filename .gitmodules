@@ -10,3 +10,126 @@
 [submodule ".config/password-store"]
 	path = .config/password-store
 	url = https://git.unkin.net/unkinben/pass.git
+[submodule ".local/src/ansible-role-base"]
+	path = .local/src/ansible-role-base
+	url = git@github.com:neoloc/ansible-role-base.git
+[submodule ".local/src/ansible-vault-pass-client"]
+	path = .local/src/ansible-vault-pass-client
+	url = https://github.com/me-vlad/ansible-vault-pass-client
+[submodule ".local/src/ansible-role-rootuser"]
+	path = .local/src/ansible-role-rootuser
+	url = git@github.com:neoloc/ansible-role-rootuser.git
+[submodule ".local/src/ansible-role-groups"]
+	path = .local/src/ansible-role-groups
+	url = git@github.com:neoloc/ansible-role-groups.git
+[submodule ".local/src/ansible-playbooks-generic"]
+	path = .local/src/ansible-playbooks-generic
+	url = git@github.com:neoloc/ansible-playbooks-generic.git
+[submodule ".local/src/ansible-role-logindefs"]
+	path = .local/src/ansible-role-logindefs
+	url = git@github.com:neoloc/ansible-role-logindefs.git
+[submodule ".local/src/ansible-role-profile"]
+	path = .local/src/ansible-role-profile
+	url = git@github.com:neoloc/ansible-role-profile.git
+[submodule ".local/src/ansible-role-apt"]
+	path = .local/src/ansible-role-apt
+	url = git@github.com:neoloc/ansible-role-apt.git
+[submodule ".local/src/ansible-role-hostname"]
+	path = .local/src/ansible-role-hostname
+	url = git@github.com:neoloc/ansible-role-hostname.git
+[submodule ".local/src/ansible-role-hostsfile"]
+	path = .local/src/ansible-role-hostsfile
+	url = git@github.com:neoloc/ansible-role-hostsfile.git
+[submodule ".local/src/ansible-role-shorewall"]
+	path = .local/src/ansible-role-shorewall
+	url = git@github.com:neoloc/ansible-role-shorewall.git
+[submodule ".local/src/ansible-role-sudoers"]
+	path = .local/src/ansible-role-sudoers
+	url = git@github.com:neoloc/ansible-role-sudoers.git
+[submodule ".local/src/ansible-playbooks-homelab"]
+	path = .local/src/ansible-playbooks-homelab
+	url = ssh://git@git.unkin.net:2222/unkinben/ansible-playbooks-homelab.git
+[submodule ".local/src/ansible-playbooks-prod"]
+	path = .local/src/ansible-playbooks-prod
+	url = git@github.com:neoloc/ansible-playbooks-prod.git
+[submodule ".local/src/ansible-role-cloudinit"]
+	path = .local/src/ansible-role-cloudinit
+	url = git@github.com:neoloc/ansible-role-cloudinit.git
+[submodule ".local/src/ansible-role-keepalived"]
+	path = .local/src/ansible-role-keepalived
+	url = git@github.com:neoloc/ansible-role-keepalived.git
+[submodule ".local/src/ansible-role-bind"]
+	path = .local/src/ansible-role-bind
+	url = git@github.com:neoloc/ansible-role-bind.git
+[submodule ".local/src/ansible-role-mariadbgalera"]
+	path = .local/src/ansible-role-mariadbgalera
+	url = git@github.com:neoloc/ansible-role-mariadbgalera.git
+[submodule ".local/src/ansible-role-interfaces"]
+	path = .local/src/ansible-role-interfaces
+	url = git@github.com:neoloc/ansible-role-interfaces.git
+[submodule ".local/src/ansible-role-resolvfile"]
+	path = .local/src/ansible-role-resolvfile
+	url = git@github.com:neoloc/ansible-role-resolvfile.git
+[submodule ".local/src/ansible-role-certbot"]
+	path = .local/src/ansible-role-certbot
+	url = git@github.com:neoloc/ansible-role-certbot.git
+[submodule ".local/src/ansible-role-epel"]
+	path = .local/src/ansible-role-epel
+	url = git@github.com:neoloc/ansible-role-epel.git
+[submodule ".local/src/ansible-role-unifi"]
+	path = .local/src/ansible-role-unifi
+	url = git@github.com:neoloc/ansbible-role-unifi.git
+[submodule ".local/src/ansible-role-haproxy"]
+	path = .local/src/ansible-role-haproxy
+	url = git@github.com:neoloc/ansible-role-haproxy.git
+[submodule ".local/src/ansible-role-nfsclient"]
+	path = .local/src/ansible-role-nfsclient
+	url = git@github.com:neoloc/ansible-role-nfsclient.git
+[submodule ".local/src/ansible-role-nfsserver"]
+	path = .local/src/ansible-role-nfsserver
+	url = git@github.com:neoloc/ansible-role-nfsserver.git
+[submodule ".local/src/ansible-role-drbd"]
+	path = .local/src/ansible-role-drbd
+	url = git@github.com:neoloc/ansible-role-drbd.git
+[submodule ".local/src/ansible-role-flags"]
+	path = .local/src/ansible-role-flags
+	url = git@github.com:neoloc/ansible-role-flags.git
+[submodule ".local/src/ansible-role-gitea"]
+	path = .local/src/ansible-role-gitea
+	url = git@github.com:neoloc/ansible-role-gitea.git
+[submodule ".local/src/ansible-role-cronapt"]
+	path = .local/src/ansible-role-cronapt
+	url = git@github.com:neoloc/ansible-role-cronapt.git
+[submodule ".local/src/ansible-role-nzbget"]
+	path = .local/src/ansible-role-nzbget
+	url = git@github.com:neoloc/ansible-role-nzbget.git
+[submodule ".local/src/ansible-role-radarr"]
+	path = .local/src/ansible-role-radarr
+	url = git@github.com:neoloc/ansible-role-radarr.git
+[submodule ".local/src/ansible-role-sonarr"]
+	path = .local/src/ansible-role-sonarr
+	url = git@github.com:neoloc/ansible-role-sonarr.git
+[submodule ".local/src/ansible-role-nginx"]
+	path = .local/src/ansible-role-nginx
+	url = https://git.unkin.net/unkinben/ansible-role-nginx.git
+[submodule ".local/src/ansible-role-squid"]
+	path = .local/src/ansible-role-squid
+	url = git@github.com:neoloc/ansible-role-squid.git
+[submodule ".local/src/ansible-role-disk"]
+	path = .local/src/ansible-role-disk
+	url = git@github.com:neoloc/ansible-role-disk.git
+[submodule ".local/src/ansible-role-sssdad"]
+	path = .local/src/ansible-role-sssdad
+	url = git@github.com:neoloc/ansible-role-sssdad.git
+[submodule ".local/src/ansible-role-ohmyzsh"]
+	path = .local/src/ansible-role-ohmyzsh
+	url = git@github.com:neoloc/ansible-role-ohmyzsh.git
+[submodule ".local/src/betterlockscreen"]
+	path = .local/src/betterlockscreen
+	url = https://github.com/pavanjadhaw/betterlockscreen
+[submodule ".local/src/mytoolsapi"]
+	path = .local/src/mytoolsapi
+	url = git@github.com:neoloc/mytoolsapi.git
+[submodule ".local/src/SF-Mono-Nerd-Font"]
+	path = .local/src/SF-Mono-Nerd-Font
+	url = https://github.com/epk/SF-Mono-Nerd-Font.git
