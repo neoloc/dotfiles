@@ -1,0 +1,9 @@
+[submodule ".config/nvim/site/pack/packer/start/packer.nvim"]
+	path = .config/nvim/site/pack/packer/start/packer.nvim
+	url = https://github.com/wbthomason/packer.nvim
+[submodule ".password-store"]
+	path = .password-store
+	url = https://git.unkin.net/unkinben/pass.git
+[submodule ".config/ohmyzsh"]
+	path = .config/ohmyzsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git

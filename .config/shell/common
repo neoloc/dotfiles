@@ -1,0 +1,50 @@
+# vim: set filetype=zsh
+
+# Set pager
+export PAGER='less'
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='nvim'
+else
+  export EDITOR='nvim'
+fi
+
+# Ansible Settings
+export ANSIBLE_NOCOWS=1
+export ANSIBLE_VAULT_PASSWORD_FILE=$HOME/.local/bin/ansible-vault-pass-client
+
+# set MPD host
+export MPD_HOST="$HOME/.config/mpd/socket"
+
+# pass passwordstore
+PASSWORD_STORE_DIR=$HOME/.config/password-store
+PASSWORD_STORE_KEY=$HOME/.config/password-store/.gpg-id
+
+
+# unzip to directory of same name, minus .zip
+unzipd () {
+    zipfile="$1"
+    zipdir=${1%.zip}
+    unzip -d "$zipdir" "$zipfile"
+}
+
+zshreload () {
+    source ~/.zshrc
+}
+
+winget () {
+    wget $1 --header="User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36"
+}
+
+myip () {curl https://ipinfo.io/ip}
+
+removespaces () {
+    mv "$1" `echo $1 | tr ' ' '_'`
+}
+
+pdf () {xpdf $1 &}
+
+# download youtube playlist to create batchfile
+# $1 is the playlist
+ytpl-export () {yt-dlp -j --flat-playlist "$1" | jq -r '.id' | sed 's_^_https://youtu.be/_'}

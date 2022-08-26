@@ -1,0 +1,84 @@
+# vim: set filetype=zsh
+
+alias dos2unix='sed "s/$//"'
+
+alias tmux='tmux -2'
+
+# list command
+if command -v exa >/dev/null 2>&1; then
+  alias ls='exa'
+else
+  alias ls='ls --color=auto'
+fi
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias ll='\ls -lh'
+alias lla='\ls -lha'
+alias lt='\ls --color=auto -lhFart'
+if command -v lsd >/dev/null 2>&1; then
+  alias ls='lsd'
+  alias ll='lsd -l'
+  alias lla='lsd -la'
+fi
+
+# editor
+if command -v vim >/dev/null 2>&1; then
+  alias vi='vim'
+fi
+if command -v nvim >/dev/null 2>&1; then
+  alias vim='nvim'
+  alias vi='nvim'
+fi
+alias purevim='vim -u NONE'
+
+# tmux
+if [[ -n $TMUX ]]; then
+  alias fzf='fzf-tmux'
+fi
+
+# ansible
+alias restart-bind='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml restart-bind.yml'
+alias update-bind='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml site-setup.yml -l proddns01 -t bind'
+alias update-squid='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml site-setup.yml -l prodinf02 -t squid'
+alias update-certbot='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml site-setup.yml -l prodinf01 -t certbot'
+alias update-haproxy='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml site-setup.yml -l prodhlb -t haproxy'
+alias update-firewalls='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml site-setup.yml -t firewall'
+alias run-envpatching='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml update-hosts.yml'
+alias run-envreboot='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml restart-hosts.yml'
+
+# configs
+alias zshconfig="$EDITOR ~/.zshrc"
+alias i3config="$EDITOR ~/.config/i3/config"
+alias sshconfig="$EDITOR ~/.ssh/config"
+alias edithosts="sudoedit /etc/hosts"
+alias vimrc="cd ~/.config/nvim/; $EDITOR"
+
+# fix commands
+alias ipcalc='~/.local/bin/ipcalc -n'
+alias mpv="mpv -hwdec=vdpau"
+alias ifstat="/usr/bin/ifstat"
+alias snapper="sudo /usr/bin/snapper"
+alias ap="~/.local/bin/ansible-playbook"
+
+# LVM
+alias lvs='sudo lvs'
+alias vgs='sudo vgs'
+alias pvs='sudo pvs'
+alias lvcreate='sudo lvcreate'
+alias lvresize='sudo lvresize'
+
+# BTRFS
+alias snapshot_home="sudo btrfs subvol snapshot /mnt/btrfsroot/home /.snaps/home@$(date '+%Y-%m-%d_%H-%M-%S')"
+alias snapshot_rootfs="sudo btrfs subvol snapshot /mnt/btrfsroot/rootfs /.snaps/rootfs@$(date '+%Y-%m-%d_%H-%M-%S')"
+
+# youtube-dl
+alias soundcloud-dl='youtube-dlc --extract-audio --audio-format vorbis --audio-quality 2'
+alias ytdl-playlist='youtube-dlc --ignore-errors --extract-audio --audio-format vorbis --format bestaudio --audio-quality 160K --output "%(title)s.%(ext)s" --yes-playlist'
+
+# python web server
+alias websvr='python3 -m http.server 8000'
+
+# powershell
+alias powershell='pwsh'
