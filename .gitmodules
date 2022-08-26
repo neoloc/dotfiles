@@ -7,3 +7,6 @@
 [submodule ".config/ohmyzsh"]
 	path = .config/ohmyzsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
+[submodule ".config/password-store"]
+	path = .config/password-store
+	url = https://git.unkin.net/unkinben/pass.git
