@@ -282,8 +282,8 @@ bindsym $mod+r mode "resize"
 mode "monitor-mode" {
         # external-only (1), laptop-only (2) or both (3)
         bindsym 1 exec ~/.local/bin/screen-external.sh
-		bindsym 2 exec ~/.local/bin/screen-laptop.sh
-		bindsym 3 exec ~/.local/bin/screen-dual.sh
+        bindsym 2 exec ~/.local/bin/screen-laptop.sh
+        bindsym 3 exec ~/.local/bin/screen-dual.sh
 
 		# back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
