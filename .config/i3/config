@@ -182,10 +182,10 @@ bindsym $mod+p exec mpc --host $HOME/.config/mpd/socket toggle
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: shell"
 set $ws2 "2: web"
-set $ws3 "3: code"
-set $ws4 "4: rdp"
+set $ws3 "3: email"
+set $ws4 "4: code"
 set $ws5 "5: games"
-set $ws6 "6"
+set $ws6 "6: rdp"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
@@ -194,7 +194,7 @@ set $ws10 "10"
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2; layout tabbed
-bindsym $mod+3 workspace $ws3
+bindsym $mod+3 workspace $ws3; layout tabbed
 bindsym $mod+4 workspace $ws4; layout tabbed
 bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
@@ -242,9 +242,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 for_window [class="urxvt"] border pixel 5
 for_window [title="Mozilla Firefox"] move container to workspace $ws2
 for_window [title="Chromium"] move container to workspace $ws2
-for_window [class="VSCodium"] move container to workspace $ws3
-for_window [title="Visual Studio Code"] move container to workspace $ws3
-for_window [class="xfreerdp"] floating disable move container to workspace $ws4
+for_window [title="Mozilla Thunderbird"] move container to workspace $ws3
+for_window [class="VSCodium"] move container to workspace $ws4
+for_window [title="Visual Studio Code"] move container to workspace $ws4
+for_window [class="xfreerdp"] floating disable move container to workspace $ws6
 for_window [class="Steam"] floating disable move container to workspace $ws5
 for_window [title="Picture-in-Picture"] sticky enable
 for_window [title="noVNC"] sticky enable floating enable
