@@ -39,14 +39,14 @@ if [[ -n $TMUX ]]; then
 fi
 
 # ansible
-alias restart-bind='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml restart-bind.yml'
-alias update-bind='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml site-setup.yml -l proddns -t bind'
-alias update-squid='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml site-setup.yml -l prodinf02 -t squid'
-alias update-certbot='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml site-setup.yml -l prodinf01 -t certbot'
-alias update-haproxy='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml site-setup.yml -l prodhlb -t haproxy'
-alias update-firewalls='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml site-setup.yml -t firewall'
-alias run-envpatching='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml update-hosts.yml'
-alias run-envreboot='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yaml restart-hosts.yml'
+alias restart-bind='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml restart-bind.yml'
+alias update-bind='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml site-setup.yml -l proddns -t bind'
+alias update-squid='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml site-setup.yml -l prodinf02 -t squid'
+alias update-certbot='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml site-setup.yml -l prodinf01 -t certbot'
+alias update-haproxy='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml site-setup.yml -l prodhlb -t haproxy'
+alias update-firewalls='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml site-setup.yml -t firewall'
+alias run-envpatching='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml update-hosts.yml'
+alias run-envreboot='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml restart-hosts.yml'
 
 # configs
 alias zshconfig="$EDITOR ~/.zshrc"
