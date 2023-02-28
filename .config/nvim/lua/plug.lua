@@ -58,5 +58,6 @@ return require('packer').startup(function(use)
                 opt = true}
   }
   use { 'navarasu/onedark.nvim' }
+  use { 'Mofiqul/dracula.nvim' }
 
 end)

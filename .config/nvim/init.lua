@@ -148,10 +148,20 @@ require('nvim-autopairs').setup{} -- Add this line
 -- lualine
 require('lualine').setup {
   options = {
+    -- theme = 'dracula-nvim',
     theme = 'onedark',
     icons_enabled = true,
   }
 }
 
+-- require("dracula").setup{
+-- }
+
 -- onedark
+require('onedark').setup {
+    colors = {
+      blue = "#247ba3"
+    },
+    style = 'darker'
+}
 require('onedark').load()
