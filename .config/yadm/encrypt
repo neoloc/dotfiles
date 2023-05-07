@@ -2,4 +2,4 @@
 .ssh/id_rsa.pub
 .ssh/config
 .ssh/config.d/*
-.git-credentials
+.config/git/git-credentials
