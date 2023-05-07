@@ -48,3 +48,6 @@ pdf () {xpdf $1 &}
 # download youtube playlist to create batchfile
 # $1 is the playlist
 ytpl-export () {yt-dlp -j --flat-playlist "$1" | jq -r '.id' | sed 's_^_https://youtu.be/_'}
+
+# common date format
+shdate () {date +'%Y%m%d'}
