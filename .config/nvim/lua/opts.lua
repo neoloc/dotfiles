@@ -102,3 +102,9 @@ local gitui = fterm:new({
 vim.keymap.set('n', '<A-g>', function()
     gitui:toggle()
 end)
+
+-- Use Xorg clipboard
+vim.cmd([[
+    set clipboard+=unnamedplus
+]])
+
