@@ -35,15 +35,37 @@ require("nvim-tree").setup({
 
 -- mason
 require("mason").setup()
+require("mason-lspconfig").setup()
 
 -- lspconfig
+-- require('lspconfig')['gofumpt'].setup{}
+-- require('lspconfig')['golines'].setup{}
+-- require('lspconfig')['goimports'].setup{}
+require('lspconfig')['gopls'].setup{
+    on_attach = on_attach,
+    cmd = {"gopls"},
+    filetypes = {"go", "gomod", "gowork", "dotmpl"},
+    settings = {
+      gopls = {
+        gofumpt = true,
+        completeUnimported = true,
+        usePlaceholders = true,
+        analyses = {
+          unusedparams = true,
+        },
+      },
+    },
+}
 require('lspconfig')['pyright'].setup {
   on_attach = on_attach,
   flags = lsp_flags,
 }
+require('lspconfig')['powershell_es'].setup{}
+require('lspconfig')['clangd'].setup{}
+require('lspconfig')['rust_analyzer'].setup{}
 require('lspconfig')['ansiblels'].setup{}
 require('lspconfig')['bashls'].setup{}
-require('lspconfig')['sumneko_lua'].setup{
+require('lspconfig')['lua_ls'].setup{
   settings = {
     Lua = {
       diagnostics = {
@@ -61,6 +83,7 @@ require('lspconfig')['yamlls'].setup{
 }
 require('lspconfig')['intelephense'].setup{}
 require('lspconfig')['grammarly'].setup{}
+require('lspconfig')['puppet'].setup{}
 require('lspconfig')['terraformls'].setup{}
 
 -- Completion Plugin Setup
@@ -118,7 +141,8 @@ cmp.setup({
 
 -- treesitter 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { "lua", "toml", "python", "bash", "yaml" },
+  --ensure_installed = { "lua", "toml", "python", "bash", "yaml", "go" },
+  ensure_installed = "all",
   auto_install = true,
   highlight = {
     enable = true,
