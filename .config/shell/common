@@ -21,6 +21,8 @@ export MPD_HOST="$HOME/.config/mpd/socket"
 PASSWORD_STORE_DIR=$HOME/.config/password-store
 PASSWORD_STORE_KEY=$HOME/.config/password-store/.gpg-id
 
+# LXD
+export LXD_SOCKET=/run/lxd.socket
 
 # unzip to directory of same name, minus .zip
 unzipd () {
