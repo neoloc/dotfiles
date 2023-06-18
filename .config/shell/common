@@ -53,3 +53,14 @@ ytpl-export () {yt-dlp -j --flat-playlist "$1" | jq -r '.id' | sed 's_^_https://
 
 # common date format
 shdate () {date +'%Y%m%d'}
+
+# create function later:
+#   large image heavy pdf into smaller pdf
+#     below will:
+#       break pages into jpg files with 300dpi
+#       resize images to roughly 100k
+#       create a new pdf from jpg files
+#
+#   pdftoppm -jpeg -r 300 input_document.pdf output_image
+#   jpegoptim --size=100k output_image*.jpg
+#   img2pdf $(ls -v output_image*.jpg) -o output_document.pdf
