@@ -47,6 +47,8 @@ return require('packer').startup(function(use)
   use { 'junegunn/gv.vim' }                          -- commit history
   use { 'windwp/nvim-autopairs' }                    -- auto close brackets, etc.
   use { 'numToStr/FTerm.nvim' }                      -- floating terminal
+  use { 'HampusHauffman/block.nvim' }                -- code blocks in different colours
+--  use { 'fatih/vim-go' }                             -- go-vim
 
 
   -- theme
