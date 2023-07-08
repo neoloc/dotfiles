@@ -179,8 +179,8 @@ require('lualine').setup {
 }
 
 require("block").setup({
-    percent = 0.8,
-    depth = 4,
+    percent = 1.2,
+    depth = 8,
     colors = nil,
     automatic = true,
 })
