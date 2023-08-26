@@ -39,21 +39,21 @@ if [[ -n $TMUX ]]; then
 fi
 
 # ansible
-alias restart-bind='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml restart-bind.yml'
-alias update-bind='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml site-setup.yml -l proddns -t bind'
-alias update-squid='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml site-setup.yml -l prodinf02 -t squid'
-alias update-certbot='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml site-setup.yml -l prodinf01 -t certbot'
-alias update-haproxy='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml site-setup.yml -l prodhlb -t haproxy'
-alias update-firewalls='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml site-setup.yml -t firewall'
-alias run-envpatching='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml update-hosts.yml'
-alias run-envreboot='cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml restart-hosts.yml'
+alias restart-bind='(cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml playbooks/restart-bind.yml)'
+alias update-bind='(cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml playbooks/site-setup.yml -l proddns -t bind)'
+alias update-squid='(cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml playbooks/site-setup.yml -l prodinf02 -t squid)'
+alias update-certbot='(cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml playbooks/site-setup.yml -l prodinf01 -t certbot)'
+alias update-haproxy='(cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml playbooks/site-setup.yml -l prodhlb -t haproxy)'
+alias update-firewalls='(cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml playbooks/site-setup.yml -t firewall)'
+alias run-envpatching='(cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml playbooks/update-hosts.yml)'
+alias run-envreboot='(cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml playbooks/restart-hosts.yml)'
 
 # configs
 alias zshconfig="$EDITOR ~/.zshrc"
 alias i3config="$EDITOR ~/.config/i3/config"
 alias sshconfig="$EDITOR ~/.ssh/config"
 alias edithosts="sudoedit /etc/hosts"
-alias vimrc="cd ~/.config/nvim/; $EDITOR"
+alias vimrc="(cd ~/.config/nvim/; $EDITOR)"
 
 # fix commands
 alias ipcalc='~/.local/bin/ipcalc -n'
