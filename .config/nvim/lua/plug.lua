@@ -48,6 +48,7 @@ return require('packer').startup(function(use)
   use { 'windwp/nvim-autopairs' }                    -- auto close brackets, etc.
   use { 'numToStr/FTerm.nvim' }                      -- floating terminal
   use { 'HampusHauffman/block.nvim' }                -- code blocks in different colours
+  use { 'rodjek/vim-puppet' }                        -- vim puppet enhancements
 --  use { 'fatih/vim-go' }                             -- go-vim
 
 
