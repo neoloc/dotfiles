@@ -55,6 +55,12 @@ alias sshconfig="$EDITOR ~/.ssh/config"
 alias edithosts="sudoedit /etc/hosts"
 alias vimrc="(cd ~/.config/nvim/; $EDITOR)"
 
+# yadm
+alias yap="yadm add -p"
+alias yadd="yadm add"
+alias ycommit="yadm commit"
+alias ypush="yadm push && yadm push origin master"
+
 # fix commands
 alias ipcalc='~/.local/bin/ipcalc -n'
 alias mpv="mpv -hwdec=vdpau"
