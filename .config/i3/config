@@ -285,6 +285,7 @@ mode "monitor-mode" {
         bindsym 1 exec ~/.local/bin/screen-external.sh
         bindsym 2 exec ~/.local/bin/screen-laptop.sh
         bindsym 3 exec ~/.local/bin/screen-dual.sh
+        bindsym 4 exec ~/.local/bin/screen-dock.sh
 
 		# back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
