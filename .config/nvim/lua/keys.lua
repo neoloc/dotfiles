@@ -12,17 +12,16 @@ local map = vim.api.nvim_set_keymap
 -- remap the key used to leave insert mode
 map('i', 'jk', '', {})
 
--- movement mappings
-map('', '<C-t><up>', 'tabr<cr>', {})
-map('', '<C-t><down>', 'tabl<cr>', {})
-map('', '<C-t><left>', 'tabp<cr>', {})
-map('', '<C-t><right>', 'tabn<cr>', {})
-
 -- swap between split windows
-map('n', '<A-Up>', ':wincmd k<CR>', {})
-map('n', '<A-Down>', ':wincmd j<CR>', {})
-map('n', '<A-Left>', ':wincmd h<CR>', {})
-map('n', '<A-Right>', ':wincmd l<CR>', {})
+map('n', '<a-up>', ':wincmd k<cr>', {})
+map('n', '<a-down>', ':wincmd j<cr>', {})
+map('n', '<a-left>', ':wincmd h<cr>', {})
+map('n', '<a-right>', ':wincmd l<cr>', {})
+
+-- switch to tab
+for i = 1, 9 do
+  map('n', '<A-'..i..'>', ':tabn '..i..'<CR>', {noremap = true, silent = true})
+end
 
 -- rewrite tabs to spaces
 map('' ,'<F2>' ,'%retab!' , {})
