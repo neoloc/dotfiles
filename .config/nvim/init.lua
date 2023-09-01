@@ -12,6 +12,7 @@ require('opts')      -- Options
 require('keys')      -- Keymaps
 require('auto')      -- Automaps
 require('plug')      -- Plugins
+require('func')      -- Functions
 
 -- nvim-tree
 require("nvim-tree").setup({
@@ -182,7 +183,7 @@ require("block").setup({
     percent = 1.1,
     depth = 4,
     colors = nil,
-    automatic = true,
+    automatic = false,
 })
 
 -- require("dracula").setup{
