@@ -1,20 +1,20 @@
 #!/usr/bin/bash
 
-# alias
-alias dnfinstall="sudo dnf install -y"
+# enable dnf copr command
+sudo dnf install -y dnf-plugins-core
 
 # enable copr
 sudo dnf copr enable ganto/lxc4 -y
 sudo dnf copr enable livegrenier/i3-desktop -y
 
-dnfinstall fedora-workstation-repositiories
+sudo dnf install -y fedora-workstation-repositiories
 
 # compilers/languages
-dnfinstall cmake freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel g++ cargo rust golang \
+use dnf install -y cmake freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel g++ cargo rust golang \
   gcc kernel-tools cc1plus gcc-c++ clang clang-tools-extra clang-devel cmake dotnet
 
 #   systools
-dnfinstall firefox chromium gimp libreoffice dia oneshot shotwell steam thunderbird iotop the_silver_searcher \
+sudo dnf install -y firefox chromium gimp libreoffice dia oneshot shotwell steam thunderbird iotop the_silver_searcher \
   cpupower btop htop dstat ifstat iftop lshw lsd minicom ncdu git gitui vim neovim tree-sitter tree-sitter-cli \
   mutt pass pass-otp lxd lxc python-lxc pdftk-java podman pwgen python3-img2pdf python3-devel python3-neovim \
   python3-netaddr shorewall shorewall6 systemd-oomd-defaults rxvt-unicode sshpass telnet terraform tig tldr \
