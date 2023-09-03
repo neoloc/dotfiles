@@ -6,17 +6,28 @@ sudo dnf install -y dnf-plugins-core
 # enable copr
 sudo dnf copr enable ganto/lxc4 -y
 sudo dnf copr enable livegrenier/i3-desktop -y
+sido dnf copr enable tokariew/i3lock-color -y
 
-sudo dnf install -y fedora-workstation-repositiories
+# install rpmfusion
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
+
+# install fedora-workstation-repositories
+sudo dnf install -y https://kojipkgs.fedoraproject.org//packages/fedora-workstation-repositories/35/4.fc37/noarch/fedora-workstation-repositories-35-4.fc37.noarch.rpm
+
+# setup hashicorp reporistory for terraform
+sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
 
 # compilers/languages
-use dnf install -y cmake freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel g++ cargo rust golang \
-  gcc kernel-tools cc1plus gcc-c++ clang clang-tools-extra clang-devel cmake dotnet
+sudo dnf install -y cmake freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel g++ cargo rust golang \
+  gcc kernel-tools gcc-c++ clang clang-tools-extra clang-devel cmake dotnet
+
+# install i3lock-color first
+sudo dnf install -y i3lock-color
 
 #   systools
-sudo dnf install -y firefox chromium gimp libreoffice dia oneshot shotwell steam thunderbird iotop the_silver_searcher \
-  cpupower btop htop dstat ifstat iftop lshw lsd minicom ncdu git gitui vim neovim tree-sitter tree-sitter-cli \
+sudo dnf install -y firefox chromium gimp libreoffice dia shotwell thunderbird iotop the_silver_searcher \
+  kernel-tools btop htop dstat ifstat iftop lshw lsd minicom ncdu git gitui vim neovim tree-sitter-cli \
   mutt pass pass-otp lxd lxc python-lxc pdftk-java podman pwgen python3-img2pdf python3-devel python3-neovim \
   python3-netaddr shorewall shorewall6 systemd-oomd-defaults rxvt-unicode sshpass telnet terraform tig tldr \
   tmux udiskie upower vifm virt-manager libvirt jpegoptim poppler-utils qpdf alacritty dunst feh i3 i3blocks \
-  i3lock-color maim network-manager-applet pavucontrol sway polybar mpc mpd mpv ncmpcpp openvpn
+  maim network-manager-applet pavucontrol sway polybar mpc mpd mpv ncmpcpp openvpn
