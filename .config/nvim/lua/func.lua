@@ -1,6 +1,6 @@
 -- FUNCTIONS --
 
--- puppet language functions
+-- all language functions
 vim.cmd [[
   augroup lang_all
     autocmd!
@@ -8,11 +8,12 @@ vim.cmd [[
   augroup END
 ]]
 
--- puppet language functions
+-- puppet language keybindings
 vim.cmd [[
   augroup lang_puppet
-    autocmd!
-    autocmd FileType puppet luafile ~/.config/nvim/lua/func/puppet.lua
+      autocmd!
+      autocmd FileType puppet nnoremap <buffer> <Leader>g :call OpenPuppetClassOrTemplate()<CR>
+      autocmd FileType puppet nnoremap <buffer> <Leader>t :call OpenPuppetTestMode()<CR>
   augroup END
 ]]
 

@@ -35,7 +35,7 @@ endfunction
 
 -- follow links to classes
 vim.cmd([[
-function! OpenPuppetClass()
+function! OpenPuppetProfileOrRole()
 
   " Get the line under the cursor
   let line = getline(".")
@@ -77,8 +77,8 @@ function! OpenPuppetTemplate()
   " Get the line under the cursor
   let line = getline(".")
 
-  " Use regex to find the full template name
-  let template = matchstr(line, 'profiles\/.*\.erb')
+  " Use regex to find the full template name (erb or epp)
+  let template = matchstr(line, 'profiles\/.*\.\(erb\|epp\)')
 
   " Initialize an empty variable for the new directory path
   let newpath = ""
@@ -100,9 +100,31 @@ function! OpenPuppetTemplate()
 endfunction
 ]])
 
--- keybindings
+-- open puppet resource
 vim.cmd([[
-nnoremap <Leader>g :call OpenPuppetClass()<CR>
-nnoremap <Leader>h :call OpenPuppetTemplate()<CR>
-nnoremap <Leader>t :call OpenPuppetTestMode()<CR>
+function! OpenPuppetClassOrTemplate()
+  " Get the line under the cursor
+  let line = getline(".")
+
+  " Check if it's a template (erb or epp)
+  if line =~ 'profiles\/.*\.\(erb\|epp\)'
+    call OpenPuppetTemplate()
+    return
+  endif
+
+  " Check if it's an included class (profiles:: or roles::)
+  if line =~ '\(profiles\|roles\)::'
+    call OpenPuppetProfileOrRole()
+    return
+  endif
+
+  " If none of the above, show an error message
+  echo "Unrecognized puppet resource."
+endfunction
 ]])
+
+-- -- keybindings
+-- vim.cmd([[
+-- nnoremap <Leader>g :call OpenPuppetClassOrTemplate()<CR>
+-- nnoremap <Leader>t :call OpenPuppetTestMode()<CR>
+-- ]])
