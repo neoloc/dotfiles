@@ -38,6 +38,9 @@ if [[ -n $TMUX ]]; then
   alias fzf='fzf-tmux'
 fi
 
+# git
+alias gcommit="git log | head -1 | awk '{print \$2}'"
+
 # ansible
 alias restart-bind='(cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml playbooks/restart-bind.yml)'
 alias update-bind='(cd ~/src/ansible-playbooks-prod; ansible-playbook -i inventory.yml playbooks/site-setup.yml -l proddns -t bind)'
