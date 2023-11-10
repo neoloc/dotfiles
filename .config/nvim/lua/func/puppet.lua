@@ -126,27 +126,27 @@ endfunction
 
 vim.cmd([[
 function! GeneratePuppetClassName()
-  " Get the full file path
+  " get the full file path
   let l:filepath = expand('%:p')
 
-  " Check if the file path ends with the desired patterns
+  " check if the file path ends with the desired patterns
   if l:filepath =~ 'site/roles/manifests/.\+\.pp$' || l:filepath =~ 'site/profiles/manifests/.\+\.pp$'
-    " Extract the part of the path after 'manifests/'
+    " extract the part of the path after 'manifests/'
     let l:manifest_path = matchstr(l:filepath, 'manifests/.\+\.pp$')
-    " Remove 'manifests/' and '.pp' to get the class path
+    " remove 'manifests/' and '.pp' to get the class path
     let l:class_path = substitute(l:manifest_path, 'manifests/\(.\+\)\.pp', '\1', '')
 
-    " Replace slashes with double colons to form the class name
+    " replace slashes with double colons to form the class name
     let l:class_name = substitute(l:class_path, '/', '::', 'g')
 
-    " Detect if it is a role or profile based on the path
+    " detect if it is a role or profile based on the path
     let l:type = l:filepath =~ 'site/roles/manifests/' ? 'roles' : 'profiles'
 
-    " Return the generated class name with the type prefix
+    " return the generated class name with the type prefix
     return l:type . '::' . l:class_name
   endif
 
-  " If the file path doesn't match the pattern, return an empty string
+  " if the file path doesn't match the pattern, return an empty string
   return ''
 endfunction
 ]])
@@ -156,11 +156,19 @@ function! ApplyPuppetTemplate()
   " Generate the class name based on the file path
   let l:class_name = GeneratePuppetClassName()
 
-  " If a class name was successfully generated, substitute the placeholder
+  " If a class name was successfully generated
   if l:class_name != ''
-    " Read the template content
-    execute '0r $HOME/.config/nvim/templates/puppet/newclass.pp'
+    " Determine the template based on class name pattern
+    if l:class_name =~ '^profiles::exports::'
+      let l:template = '$HOME/.config/nvim/templates/puppet/export.pp'
+    else
+      let l:template = '$HOME/.config/nvim/templates/puppet/newclass.pp'
+    endif
 
+    " Read the appropriate template content
+    execute '0r ' . l:template
+
+    " Substitute the placeholder with the class name
     execute "1,\$s/%CLASS_NAME%/" . l:class_name . "/g"
   endif
 endfunction
