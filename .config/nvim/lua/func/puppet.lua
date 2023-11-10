@@ -123,8 +123,45 @@ function! OpenPuppetClassOrTemplate()
 endfunction
 ]])
 
--- -- keybindings
--- vim.cmd([[
--- nnoremap <Leader>g :call OpenPuppetClassOrTemplate()<CR>
--- nnoremap <Leader>t :call OpenPuppetTestMode()<CR>
--- ]])
+
+vim.cmd([[
+function! GeneratePuppetClassName()
+  " Get the full file path
+  let l:filepath = expand('%:p')
+
+  " Check if the file path ends with the desired patterns
+  if l:filepath =~ 'site/roles/manifests/.\+\.pp$' || l:filepath =~ 'site/profiles/manifests/.\+\.pp$'
+    " Extract the part of the path after 'manifests/'
+    let l:manifest_path = matchstr(l:filepath, 'manifests/.\+\.pp$')
+    " Remove 'manifests/' and '.pp' to get the class path
+    let l:class_path = substitute(l:manifest_path, 'manifests/\(.\+\)\.pp', '\1', '')
+
+    " Replace slashes with double colons to form the class name
+    let l:class_name = substitute(l:class_path, '/', '::', 'g')
+
+    " Detect if it is a role or profile based on the path
+    let l:type = l:filepath =~ 'site/roles/manifests/' ? 'roles' : 'profiles'
+
+    " Return the generated class name with the type prefix
+    return l:type . '::' . l:class_name
+  endif
+
+  " If the file path doesn't match the pattern, return an empty string
+  return ''
+endfunction
+]])
+
+vim.cmd([[
+function! ApplyPuppetTemplate()
+  " Generate the class name based on the file path
+  let l:class_name = GeneratePuppetClassName()
+
+  " If a class name was successfully generated, substitute the placeholder
+  if l:class_name != ''
+    " Read the template content
+    execute '0r $HOME/.config/nvim/templates/puppet/newclass.pp'
+
+    execute "1,\$s/%CLASS_NAME%/" . l:class_name . "/g"
+  endif
+endfunction
+]])

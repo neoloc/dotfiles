@@ -14,6 +14,8 @@ vim.cmd [[
       autocmd!
       autocmd FileType puppet nnoremap <buffer> <Leader>g :call OpenPuppetClassOrTemplate()<CR>
       autocmd FileType puppet nnoremap <buffer> <Leader>t :call OpenPuppetTestMode()<CR>
+      autocmd BufNewFile site/roles/manifests/**.pp call ApplyPuppetTemplate()
+      autocmd BufNewFile site/profiles/manifests/**.pp call ApplyPuppetTemplate()
   augroup END
 ]]
 
