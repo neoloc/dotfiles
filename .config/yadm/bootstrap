@@ -30,4 +30,5 @@ sudo dnf install -y firefox chromium gimp libreoffice dia shotwell thunderbird i
   mutt pass pass-otp lxd lxc python-lxc pdftk-java podman pwgen python3-img2pdf python3-devel python3-neovim \
   python3-netaddr shorewall shorewall6 systemd-oomd-defaults rxvt-unicode sshpass telnet terraform tig tldr \
   tmux udiskie upower vifm virt-manager libvirt jpegoptim poppler-utils qpdf alacritty dunst feh i3 i3blocks \
-  maim network-manager-applet pavucontrol sway polybar mpc mpd mpv ncmpcpp openvpn
+  maim network-manager-applet pavucontrol sway swaylock waybar wl-clipboard grim slurp polybar mpc mpd mpv \
+  ncmpcpp openvpn

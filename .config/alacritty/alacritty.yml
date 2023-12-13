@@ -40,7 +40,8 @@ colors:
   search:
     matches:
       foreground: '#44475a'
-      background: '#50fa7b'
+        #background: '#50fa7b'
+      background: '#11aa7b'
     focused_match:
       foreground: '#44475a'
       background: '#ffb86c'

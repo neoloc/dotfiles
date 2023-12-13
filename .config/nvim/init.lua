@@ -192,7 +192,10 @@ require("block").setup({
 -- onedark
 require('onedark').setup {
     colors = {
-      blue = "#247ba3"
+      blue = "#247ba3",
+      green = "#6fa11a",
+      white = "#ecf0f0",
+      gray = "#c3d3d3",
     },
     style = 'darker'
 }

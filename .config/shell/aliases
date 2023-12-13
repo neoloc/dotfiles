@@ -53,10 +53,12 @@ alias run-envreboot='(cd ~/src/ansible-playbooks-prod; ansible-playbook -i inven
 
 # configs
 alias zshconfig="$EDITOR ~/.zshrc"
+alias zshrc="$EDITOR ~/.zshrc"
 alias i3config="$EDITOR ~/.config/i3/config"
 alias sshconfig="$EDITOR ~/.ssh/config"
 alias edithosts="sudoedit /etc/hosts"
 alias vimrc="(cd ~/.config/nvim/; $EDITOR)"
+alias tigrc="$EDITOR $HOME/.config/tig/config"
 
 # yadm
 alias yap="yadm add -p"
