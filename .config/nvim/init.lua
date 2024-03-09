@@ -32,6 +32,9 @@ require("nvim-tree").setup({
     dotfiles = false,
     custom = { "^.git$" },
   },
+  update_focused_file = {
+    enable = true,
+  },
 })
 
 -- mason

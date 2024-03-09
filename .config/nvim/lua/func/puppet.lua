@@ -116,19 +116,19 @@ endfunction
 
 -- open puppet resource
 vim.cmd([[
-function! OpenPuppetClassOrTemplate()
+function! OpenPuppetClassOrTemplate(layout)
   " Get the line under the cursor
   let line = getline(".")
 
   " Check if it's a template (erb or epp)
   if line =~ 'profiles\/.*\.\(erb\|epp\)'
-    call OpenPuppetTemplate()
+    call OpenPuppetTemplate(a:layout)
     return
   endif
 
   " Check if it's an included class (profiles:: or roles::)
   if line =~ '\(profiles\|roles\)::'
-    call OpenPuppetProfileOrRole()
+    call OpenPuppetProfileOrRole(a:layout)
     return
   endif
 
