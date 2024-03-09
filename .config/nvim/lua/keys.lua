@@ -45,4 +45,9 @@ map('', '<C-n>', ':NvimTreeToggle<CR>', {})
 map('n', 'l', ':IndentLinesToggle<CR>', {})
 map('n', 't', ':TagbarToggle<CR>', {})
 map('n', 'ff', [[:Telescope find_files]], {})
-map('n', 'T', ':lua require("FTerm").toggle()<CR>', {})
+-- map('n', 'T', ':lua require("FTerm").toggle()<CR>', {})
+
+-- Open a file in a vertical split, horizontal split and move a split to a new tab
+map('n', '<Leader>sv', ':vsplit ', {noremap = true, silent = false})
+map('n', '<Leader>sh', ':split ', {noremap = true, silent = false})
+map('n', '<Leader>mt', ':tabedit %<CR>', {noremap = true, silent = true})

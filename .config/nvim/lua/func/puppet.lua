@@ -10,7 +10,7 @@ function! OpenPuppetTestMode()
   echo "    v - puppet-validate"
   echo "    l - puppet-lint"
   echo "    q - quit test mode"
-  
+
   " Keybinding to run tests on the current buffer
   nnoremap <buffer> v :!/usr/local/bin/puppet-validate %<CR>
   nnoremap <buffer> l :!/usr/local/bin/puppet-lint %<CR>
@@ -35,7 +35,7 @@ endfunction
 
 -- follow links to classes
 vim.cmd([[
-function! OpenPuppetProfileOrRole()
+function! OpenPuppetProfileOrRole(layout)
 
   " Get the line under the cursor
   let line = getline(".")
@@ -65,14 +65,21 @@ function! OpenPuppetProfileOrRole()
   let fullpath = dirpath . filepath . ".pp"
 
   " Open the file in a new tab
-  execute "tabedit " . fullpath
-
+  if a:layout == 'horizontal'
+    execute 'split ' . fullpath
+  elseif a:layout == 'vertical'
+    execute 'vsplit ' . fullpath
+  elseif a:layout == 'tab'
+    execute 'tabedit ' . fullpath
+  else
+    echo "Invalid layout specified."
+  endif
 endfunction
 ]])
 
 -- follow links to templates
 vim.cmd([[
-function! OpenPuppetTemplate()
+function! OpenPuppetTemplate(layout)
 
   " Get the line under the cursor
   let line = getline(".")
@@ -95,8 +102,15 @@ function! OpenPuppetTemplate()
   let fullpath = newpath
 
   " Open the file in a new tab
-  execute "tabedit " . fullpath
-
+  if a:layout == 'horizontal'
+    execute 'split ' . fullpath
+  elseif a:layout == 'vertical'
+    execute 'vsplit ' . fullpath
+  elseif a:layout == 'tab'
+    execute 'tabedit ' . fullpath
+  else
+    echo "Invalid layout specified."
+  endif
 endfunction
 ]])
 

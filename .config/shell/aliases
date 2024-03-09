@@ -59,6 +59,7 @@ alias sshconfig="$EDITOR ~/.ssh/config"
 alias edithosts="sudoedit /etc/hosts"
 alias vimrc="(cd ~/.config/nvim/; $EDITOR)"
 alias tigrc="$EDITOR $HOME/.config/tig/config"
+alias swayrc="$EDITOR ~/.config/sway/config"
 
 # yadm
 alias yap="yadm add -p"
@@ -81,8 +82,16 @@ alias lvcreate='sudo lvcreate'
 alias lvresize='sudo lvresize'
 
 # BTRFS
-alias snapshot_home="sudo btrfs subvol snapshot /mnt/btrfsroot/home /.snaps/home@$(date '+%Y-%m-%d_%H-%M-%S')"
-alias snapshot_rootfs="sudo btrfs subvol snapshot /mnt/btrfsroot/rootfs /.snaps/rootfs@$(date '+%Y-%m-%d_%H-%M-%S')"
+alias snapshot_home="sudo btrfs subvol snapshot /mnt/btrfsroot/@home /.snaps/home@$(date +'%Y%m%d')"
+alias snapshot_rootfs="sudo btrfs subvol snapshot /mnt/btrfsroot/@rootfs /.snaps/rootfs@$(date +'%Y%m%d')"
+
+# sudo rm /mnt/btrfsroot/@snaps/home-latest
+# sudo btrfs subvolume snapshot -r /mnt/btrfsroot/@home /mnt/btrfsroot/@snaps/home-$(shdate)
+# sudo ln -s /mnt/btrfsroot/@snaps/home-$(shdate) /mnt/btrfsroot/@snaps/home-latest
+
+# sudo rm /mnt/btrfsroot/@snaps/rootfs-latest
+# sudo btrfs subvolume snapshot -r /mnt/btrfsroot/@rootfs /mnt/btrfsroot/@snaps/rootfs-$(shdate)
+# sudo ln -s /mnt/btrfsroot/@snaps/rootfs-$(shdate) /mnt/btrfsroot/@snaps/rootfs-latest
 
 # youtube-dl
 alias soundcloud-dl='youtube-dlc --extract-audio --audio-format vorbis --audio-quality 2'
