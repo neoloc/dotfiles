@@ -1,4 +1,9 @@
 vim.cmd([[
+let g:session_dir = expand('~/.cache/nvim/sessions/')
+if !isdirectory(g:session_dir)
+    call mkdir(g:session_dir, "p")
+endif
+
 command! SaveSession call SaveSession()
 function! SaveSession()
     let session_file = g:session_dir . GetRepositoryName() . '_' . GetCurrentGitBranch() . '.vim'

@@ -1,15 +1,22 @@
 -- FUNCTIONS --
 
 -- all language functions
-vim.cmd [[
-  augroup lang_all
-    autocmd!
-    autocmd FileType * luafile ~/.config/nvim/lua/func/utils.lua
-    autocmd FileType * luafile ~/.config/nvim/lua/func/tabline.lua
-    autocmd FileType * luafile ~/.config/nvim/lua/func/popterm.lua
-    autocmd FileType * luafile ~/.config/nvim/lua/func/sessions.lua
-  augroup END
-]]
+require('func.utils')
+require('func.tabline')
+require('func.popterm')
+require('func.sessions')
+require('func.findfile')
+
+--  vim.cmd [[
+--    augroup lang_all
+--      autocmd!
+--      autocmd FileType * luafile ~/.config/nvim/lua/func/utils.lua
+--      autocmd FileType * luafile ~/.config/nvim/lua/func/tabline.lua
+--      autocmd FileType * luafile ~/.config/nvim/lua/func/popterm.lua
+--      autocmd FileType * luafile ~/.config/nvim/lua/func/sessions.lua
+--      autocmd FileType * luafile ~/.config/nvim/lua/func/findfile.lua
+--    augroup END
+--  ]]
 
 -- puppet language keybindings
 vim.cmd [[
