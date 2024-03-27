@@ -29,10 +29,10 @@ vim.cmd([[
     endfunction
 
     " Define the :Popterm command to open the centered terminal
-    command! Popterm call OpenCenteredTerminal()
-    highlight Terminal guibg=#000000 guifg=none
-    nnoremap T :Popterm<CR>
     autocmd TermOpen * setlocal winhighlight=Normal:Terminal
+    highlight Terminal guibg=#000000 guifg=none
+    command! Popterm call OpenCenteredTerminal()
+    nnoremap T :Popterm<CR>
 
   endif
 ]])

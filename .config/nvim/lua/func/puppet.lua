@@ -187,3 +187,55 @@ function! ApplyPuppetTemplate()
   endif
 endfunction
 ]])
+
+vim.cmd([[
+function! ToggleERBSyntax()
+    if !exists('b:original_syntax')
+        " If b:original_syntax is not set, default to eruby and store the current syntax
+        let b:original_syntax = &filetype
+        setlocal syntax=eruby
+    else
+        " If b:original_syntax is set, toggle the syntax based on the current setting
+        if &syntax == 'eruby'
+            " Extract the base file type from the file name
+            let l:filename = expand('%:t')
+            let l:base_filetype = matchstr(l:filename, '\v%(\.\w+)?\.erb$')
+            let l:base_filetype = substitute(l:base_filetype, '\.erb$', '', '')
+            let l:base_filetype = substitute(l:base_filetype, '^.', '', '')
+
+            " Determine the syntax based on the base file type
+            if l:base_filetype == 'sh'
+                setlocal syntax=sh
+            elseif l:base_filetype == 'py'
+                setlocal syntax=python
+            elseif l:base_filetype == 'pl'
+                setlocal syntax=perl
+            elseif l:base_filetype == 'yml' || l:base_filetype == 'yaml'
+                setlocal syntax=yaml
+            else
+                " Attempt to guess the syntax from the shebang if unknown
+                let l:firstline = getline(1)
+                if l:firstline =~# '^#!.*\/bash'
+                    setlocal syntax=sh
+                elseif l:firstline =~# '^#!.*\/zsh'
+                    setlocal syntax=sh
+                elseif l:firstline =~# '^#!.*\/python'
+                    setlocal syntax=python
+                elseif l:firstline =~# '^#!.*\/perl'
+                    setlocal syntax=perl
+                else
+                    " Fallback to eruby syntax if no known type is found
+                    echo "Could not swap syntax highlighter; falling back to eruby."
+                endif
+            endif
+        else
+            " If the current syntax is not eruby, revert to the original syntax
+            setlocal syntax=eruby
+            echo "Switched back to eruby syntax."
+        endif
+        " Reset b:original_syntax to indicate the syntax has been toggled back
+        unlet b:original_syntax
+    endif
+endfunction
+]])
+

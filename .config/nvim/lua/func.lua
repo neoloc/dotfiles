@@ -32,3 +32,10 @@ vim.cmd [[
   augroup END
 ]]
 
+-- erb/eruby language keybindings
+vim.cmd [[
+  augroup lang_eruby
+      autocmd!
+      autocmd FileType eruby nnoremap <buffer> <Leader>s :call ToggleERBSyntax()<CR>
+  augroup END
+]]

@@ -1,19 +1,37 @@
 vim.cmd([[
 let g:previous_buffer = 0
 
-function! FindFile()
+function! FindFile(searchType)
     " Store the buffer number of the current window
     let g:previous_buffer = bufnr('%')
 
     " Prompt user for search pattern
     let pattern = input('Enter search pattern: ')
-    let escaped_pattern = escape(pattern, '\/$.*[~')
-    "let cmd = "grep -Rl " . escaped_pattern . " *"
-    let cmd = "rg --column --no-heading --color=never -l " . shellescape(escaped_pattern)
+    let keywords = split(pattern)
+    " Construct a regex pattern for flexible matching in paths
+    let regex_pattern = join(map(keywords, 'escape(v:val, "\\/$.*[~")'), '.*')
 
+    " Initialize an empty list for results
+    let results = []
 
-    " Get the search results as a list
-    let results = systemlist(cmd)
+    " Find in file content
+    if a:searchType ==# 'string' || a:searchType ==# 'all'
+        let cmd_content = "rg --column --no-heading --color=never -l " . shellescape(pattern)
+        let results_content = systemlist(cmd_content)
+        let results = results + results_content
+    endif
+
+    " Find in file path with the constructed regex pattern
+    if a:searchType ==# 'path' || a:searchType ==# 'all'
+        " Use the regex pattern for searching in paths
+        let cmd_path = "rg --files | grep -P '" . regex_pattern . "'"
+        let results_path = systemlist(cmd_path)
+        let results = results + results_path
+    endif
+
+    " Remove duplicates and sort the results
+    let results = sort(uniq(results))
+
     if empty(results)
         echo "No files found for pattern: " . pattern
         return
@@ -41,6 +59,7 @@ function! FindFile()
     nnoremap <silent> <buffer> v :call OpenFile('vsplit', g:previous_buffer)<CR>
     nnoremap <silent> <buffer> h :call OpenFile('split', g:previous_buffer)<CR>
     nnoremap <silent> <buffer> t :call OpenFile('tabedit', g:previous_buffer)<CR>
+    nnoremap <silent> <buffer> q :close<CR>
 
     " Focus on the results window
     normal! G
@@ -68,5 +87,9 @@ function! OpenFile(openType, bufnr)
     endif
 endfunction
 
-nnoremap <Leader>ff :call FindFile()<CR>
+nnoremap <Leader>ff :call FindFile("string")<CR>
+nnoremap <Leader>fs :call FindFile("string")<CR>
+nnoremap <Leader>fp :call FindFile("path")<CR>
+nnoremap <Leader>fa :call FindFile("all")<CR>
+
 ]])
