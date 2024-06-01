@@ -54,6 +54,10 @@ ytpl-export () {yt-dlp -j --flat-playlist "$1" | jq -r '.id' | sed 's_^_https://
 # common date format
 shdate () {date +'%Y%m%d'}
 
+ncurl() {
+    curl --netrc-file <(pass show personal/netrc) "$@"
+}
+
 # create function later:
 #   large image heavy pdf into smaller pdf
 #     below will:
