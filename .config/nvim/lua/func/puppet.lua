@@ -46,6 +46,84 @@ function! OpenPuppetProfileOrRole(layout)
   " Initialize an empty variable for the directory
   let dirpath = ""
 
+  " List modules in puppet-control here
+  let module_list = []
+  call add(module_list, 'certbot')
+  call add(module_list, 'glauth')
+  call add(module_list, 'jellyfin')
+  call add(module_list, 'lidarr')
+  call add(module_list, 'networking')
+  call add(module_list, 'nzbget')
+  call add(module_list, 'prowlarr')
+  call add(module_list, 'radarr')
+  call add(module_list, 'readarr')
+  call add(module_list, 'redisha')
+  call add(module_list, 'sonarr')
+
+  " Check if the class name starts with 'profiles::' or 'roles::'
+  if classname =~ '^profiles::'
+    let dirpath = "site/profiles/manifests/"
+    let classname = substitute(classname, 'profiles::', '', '')
+  elseif classname =~ '^roles::'
+    let dirpath = "site/roles/manifests/"
+    let classname = substitute(classname, 'roles::', '', '')
+  else
+    let matched = 0
+    for module in module_list
+      if classname =~ '^' . module . '::'
+        let dirpath = "modules/" . module . "/manifests/"
+        let parts = split(classname, '::')
+        if len(parts) > 1
+          let classname = join(parts[1:], '::')
+        else
+          let classname = 'init'
+        endif
+        let matched = 1
+        break
+      endif
+    endfor
+    if matched == 0
+      if classname =~ '::'
+        echo "Unknown module"
+        return
+      else
+        echo "Unknown class prefix, should be profiles:: or roles::, or be a listed module."
+        return
+      endif
+    endif
+  endif
+
+  " Replace :: with / to convert class name to file path
+  let filepath = substitute(classname, '::', '/', 'g')
+
+  " Create the full file path
+  let fullpath = dirpath . filepath . ".pp"
+
+  " Open the file in a new tab
+  if a:layout == 'horizontal'
+    execute 'split ' . fullpath
+  elseif a:layout == 'vertical'
+    execute 'vsplit ' . fullpath
+  elseif a:layout == 'tab'
+    execute 'tabedit ' . fullpath
+  else
+    echo "Invalid layout specified."
+  endif
+endfunction
+]])
+
+vim.cmd([[
+function! OpenPuppetProfileOrRoleOriginal(layout)
+
+  " Get the line under the cursor
+  let line = getline(".")
+
+  " Use a regex to find the full class name
+  let classname = tolower(matchstr(line, '\v\w+(\:\:\w+)+'))
+
+  " Initialize an empty variable for the directory
+  let dirpath = ""
+
   " Check if the class name starts with 'profiles::' or 'roles::'
   if classname =~ '^profiles::'
     let dirpath = "site/profiles/manifests/"
@@ -127,7 +205,7 @@ function! OpenPuppetClassOrTemplate(layout)
   endif
 
   " Check if it's an included class (profiles:: or roles::)
-  if line =~ '\(profiles\|roles\)::'
+  if line =~ '::'
     call OpenPuppetProfileOrRole(a:layout)
     return
   endif
