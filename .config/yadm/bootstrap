@@ -5,7 +5,7 @@ sudo dnf install -y dnf-plugins-core
 
 # enable copr
 sudo dnf copr enable ganto/lxc4 -y
-sudo dnf copr enable livegrenier/i3-desktop -y
+#sudo dnf copr enable livegrenier/i3-desktop -y
 sido dnf copr enable tokariew/i3lock-color -y
 
 # install rpmfusion
