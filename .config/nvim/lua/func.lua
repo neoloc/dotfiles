@@ -39,3 +39,14 @@ vim.cmd [[
       autocmd FileType eruby nnoremap <buffer> <Leader>s :call ToggleERBSyntax()<CR>
   augroup END
 ]]
+
+
+-- terraform language keybindings
+vim.cmd [[
+  augroup lang_terraform
+      autocmd!
+      autocmd BufNewFile,BufRead *.tf set filetype=terraform
+  augroup END
+]]
+
+

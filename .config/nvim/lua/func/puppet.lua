@@ -49,6 +49,7 @@ function! OpenPuppetProfileOrRole(layout)
   " List modules in puppet-control here
   let module_list = []
   call add(module_list, 'certbot')
+  call add(module_list, 'droneci')
   call add(module_list, 'glauth')
   call add(module_list, 'jellyfin')
   call add(module_list, 'lidarr')
