@@ -50,6 +50,7 @@ return require('packer').startup(function(use)
   use { 'numToStr/FTerm.nvim' }                      -- floating terminal
   use { 'HampusHauffman/block.nvim' }                -- code blocks in different colours
   use { 'rodjek/vim-puppet' }                        -- vim puppet enhancements
+  use { 'jvirtanen/vim-hcl' }                        -- hcl syntax highlighting
 --  use { 'fatih/vim-go' }                             -- go-vim
 
 

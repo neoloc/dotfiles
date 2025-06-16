@@ -154,3 +154,12 @@ export SSH_AUTH_SOCK
 # load shell settings
 test -r $XDG_CONFIG_HOME/shell/common && source $XDG_CONFIG_HOME/shell/common
 test -r $XDG_CONFIG_HOME/shell/aliases && source $XDG_CONFIG_HOME/shell/aliases
+
+# autocomplete tools
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
+complete -o nospace -C /usr/bin/consul consul
+complete -o nospace -C /usr/bin/nomad nomad
+complete -o nospace -C /usr/bin/vault vault
+eval "$(uv generate-shell-completion zsh)"
+eval "$(nfpm completion zsh)"

@@ -32,6 +32,8 @@ if command -v nvim >/dev/null 2>&1; then
   alias vi='nvim'
 fi
 alias purevim='vim -u NONE'
+alias vimp='xargs nvim -p'
+
 
 # tmux
 if [[ -n $TMUX ]]; then

@@ -17,7 +17,8 @@ export ANSIBLE_VAULT_PASSWORD_FILE=$HOME/.local/bin/ansible-vault-pass-client
 # VAULT
 export VAULT_ADDR=https://vault.service.consul:8200
 vaultlogin () {
-    vault login $(pass show personal/vault/syd1/token)
+    #vault login $(pass show personal/vault/syd1/token)
+    export VAULT_TOKEN=$(vault login --field=token --method=ldap username=benvin)
 }
 
 # CONSUL: https://developer.hashicorp.com/consul/commands
@@ -25,6 +26,9 @@ export CONSUL_HTTP_ADDR=consul.service.consul
 export CONSUL_HTTP_TOKEN_FILE=$HOME/.config/consul/token.secret
 export CONSUL_HTTP_SSL=true
 export CONSUL_HTTP_SSL_VERIFY=true
+
+# NOMAD
+export NOMAD_ADDR=https://nomad.service.consul:4646
 
 # set MPD host
 export MPD_HOST="$HOME/.config/mpd/socket"

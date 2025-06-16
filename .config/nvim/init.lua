@@ -37,59 +37,6 @@ require("nvim-tree").setup({
   },
 })
 
--- mason
-require("mason").setup()
-require("mason-lspconfig").setup()
-
--- lspconfig
--- require('lspconfig')['gofumpt'].setup{}
--- require('lspconfig')['golines'].setup{}
--- require('lspconfig')['goimports'].setup{}
-require('lspconfig')['gopls'].setup{
-    on_attach = on_attach,
-    cmd = {"gopls"},
-    filetypes = {"go", "gomod", "gowork", "dotmpl"},
-    settings = {
-      gopls = {
-        gofumpt = true,
-        completeUnimported = true,
-        usePlaceholders = true,
-        analyses = {
-          unusedparams = true,
-        },
-      },
-    },
-}
-require('lspconfig')['pyright'].setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
-require('lspconfig')['powershell_es'].setup{}
-require('lspconfig')['clangd'].setup{}
-require('lspconfig')['rust_analyzer'].setup{}
-require('lspconfig')['ansiblels'].setup{}
-require('lspconfig')['bashls'].setup{}
-require('lspconfig')['lua_ls'].setup{
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim', 'on_attach', 'lsp_flags'}
-      }
-    }
-  }
-}
-require('lspconfig')['yamlls'].setup{
-  settings = {
-    yaml = {
-      customTags = { '!vault'}
-    }
-  }
-}
-require('lspconfig')['intelephense'].setup{}
-require('lspconfig')['grammarly'].setup{}
-require('lspconfig')['puppet'].setup{}
-require('lspconfig')['terraformls'].setup{}
-
 -- Completion Plugin Setup
 local cmp = require'cmp'
 cmp.setup({
@@ -121,7 +68,7 @@ cmp.setup({
     { name = 'nvim_lsp_signature_help'},            -- display function signatures with current parameter emphasized
     { name = 'nvim_lua', keyword_length = 2},       -- complete neovim's Lua runtime API such vim.lsp.*
     { name = 'buffer', keyword_length = 2 },        -- source current buffer
-    { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip 
+    { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip
     { name = 'calc'},                               -- source for math calculation
   },
   window = {
@@ -143,10 +90,87 @@ cmp.setup({
   },
 })
 
--- treesitter 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+-- mason
+require("mason").setup()
+require("mason-lspconfig").setup()
+
+-- lspconfig
+-- require('lspconfig')['gofumpt'].setup{}
+-- require('lspconfig')['golines'].setup{}
+-- require('lspconfig')['goimports'].setup{}
+require('lspconfig')['gopls'].setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = {"gopls"},
+    filetypes = {"go", "gomod", "gowork", "dotmpl"},
+    settings = {
+      gopls = {
+        gofumpt = true,
+        completeUnimported = true,
+        usePlaceholders = true,
+        analyses = {
+          unusedparams = true,
+        },
+      },
+    },
+}
+require('lspconfig')['pyright'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  flags = lsp_flags,
+}
+require('lspconfig')['powershell_es'].setup{}
+require('lspconfig')['clangd'].setup{}
+require('lspconfig')['rust_analyzer'].setup{}
+require('lspconfig')['ansiblels'].setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+require('lspconfig')['bashls'].setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+require('lspconfig')['lua_ls'].setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim', 'on_attach', 'lsp_flags'}
+      }
+    }
+  }
+}
+require('lspconfig')['yamlls'].setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    yaml = {
+      customTags = { '!vault'}
+    }
+  }
+}
+require('lspconfig')['intelephense'].setup{}
+require('lspconfig')['grammarly'].setup{}
+require('lspconfig')['puppet'].setup{}
+require('lspconfig')['terraformls'].setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+vim.api.nvim_create_autocmd({"BufWritePre"}, {
+  pattern = {"*.tf", "*.tfvars"},
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
+
+-- treesitter
 require('nvim-treesitter.configs').setup {
-  --ensure_installed = { "lua", "toml", "python", "bash", "yaml", "go" },
-  ensure_installed = "all",
+  ensure_installed = { "lua", "toml", "python", "bash", "yaml", "go" },
+  --ensure_installed = "all",
   auto_install = true,
   highlight = {
     enable = true,
@@ -226,3 +250,15 @@ require('mini.indentscope').setup()
 require('mini.splitjoin').setup()
 require('mini.surround').setup()
 require('mini.trailspace').setup()
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "*.py",
+    callback = function()
+        vim.defer_fn(function()
+            local venv_path = vim.fn.getcwd() .. "/.venv/bin/python"
+            if vim.fn.filereadable(venv_path) == 1 then
+                vim.cmd("PyrightSetPythonPath " .. venv_path)
+            end
+        end, 1000)  -- 1 second delay (1000ms)
+    end,
+})

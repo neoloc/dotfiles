@@ -49,4 +49,12 @@ vim.cmd [[
   augroup END
 ]]
 
-
+-- tmpl language keybindings
+vim.cmd [[
+  augroup lang_tmpl
+      autocmd!
+      autocmd BufNewFile,BufRead *.yml.tmpl set filetype=yaml
+      autocmd BufNewFile,BufRead *.yaml.tmpl set filetype=yaml
+      autocmd BufNewFile,BufRead *.hcl.tmpl set filetype=hcl
+  augroup END
+]]
