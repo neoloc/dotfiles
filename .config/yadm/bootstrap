@@ -32,3 +32,9 @@ sudo dnf install -y firefox chromium gimp libreoffice dia shotwell thunderbird i
   tmux udiskie upower vifm virt-manager libvirt jpegoptim poppler-utils qpdf alacritty dunst feh i3 i3blocks \
   maim network-manager-applet pavucontrol sway swaylock waybar wl-clipboard grim slurp polybar mpc mpd mpv \
   ncmpcpp openvpn
+
+
+
+# NPM
+npm i opencode-ai@latest
+ln -s ~/node_modules/.bin/opencode ~/bin/opencode

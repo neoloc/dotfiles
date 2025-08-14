@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+export GPG_TTY=$(tty)
+export $(pass show personal/radosgw/benvin)
+
+restic backup "$HOME" --exclude-caches --one-file-system \
+  --exclude '**/.cache' \
+  --exclude '**/.terraform' \
+  --exclude '**/.terragrunt-cache' \
+  --exclude '**/.local/share/containers' \
+  --exclude '**/go/pkg/mod' \
+  --exclude '**/Downloads' \
+  --exclude '**/.thunderbird' \
+  --exclude '**/backups' \
+  --exclude '**/Video'

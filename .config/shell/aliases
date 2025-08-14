@@ -72,7 +72,7 @@ alias ypush="yadm push && yadm push origin master"
 # fix commands
 alias ipcalc='~/.local/bin/ipcalc -n'
 alias mpv="mpv -hwdec=vdpau"
-alias ifstat="/usr/bin/ifstat"
+alias ifstat="/usr/local/bin/ifstat"
 alias snapper="sudo /usr/bin/snapper"
 alias ap="~/.local/bin/ansible-playbook"
 

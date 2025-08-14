@@ -62,6 +62,8 @@ function! OpenPuppetProfileOrRole(layout)
   call add(module_list, 'readarr')
   call add(module_list, 'redisha')
   call add(module_list, 'sonarr')
+  call add(module_list, 'vlcluster')
+  call add(module_list, 'vmcluster')
 
   " Check if the class name starts with 'profiles::' or 'roles::'
   if classname =~ '^profiles::'

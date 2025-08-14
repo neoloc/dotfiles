@@ -74,6 +74,10 @@ ncurl() {
     curl --netrc-file <(pass show personal/netrc) "$@"
 }
 
+export GPG_TTY=$(tty)
+export RESTIC_REPOSITORY=s3:https://radosgw.service.consul/restic-personal
+export RESTIC_PASSWORD_COMMAND="pass show personal/restic/metabox"
+
 # create function later:
 #   large image heavy pdf into smaller pdf
 #     below will:
