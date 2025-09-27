@@ -301,11 +301,13 @@ bindsym $mod+r mode "resize"
 set $laptop eDP-1
 set $dell1 'Dell Inc. DELL U2713HM GK0KD357412L'
 set $dell2 'Dell Inc. DELL U2713HM GK0KD357413L'
+set $tv 'Samsung Electric Company SAMSUNG 0x01000E00'
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
 output $laptop resolution 1920x1080 position 0,0
 output $dell1 resolution 2560x1440@59.951Hz position 0,660 transform normal
 output $dell2 resolution 2560x1440@59.951Hz position 2560,0 transform 270
+output $tv resolution 1920x1080@59.951Hz position 0,660 transform normal
 
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
