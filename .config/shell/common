@@ -88,3 +88,55 @@ export RESTIC_PASSWORD_COMMAND="pass show personal/restic/metabox"
 #   pdftoppm -jpeg -r 300 input_document.pdf output_image
 #   jpegoptim --size=100k output_image*.jpg
 #   img2pdf $(ls -v output_image*.jpg) -o output_document.pdf
+
+# Create a git worktree for the current repo.
+# Usage: newtree <branch-name> [<from-ref>]
+# - If <from-ref> is omitted, defaults to HEAD.
+# - Worktree path: $HOME/src/worktrees/<repo_name>/<branch_name_sanitised>
+#   (slashes and dashes in the *path component only* are replaced with underscores)
+newtree() {
+  local branch from_ref repo_root repo_name sanitized dest parent
+  branch="$1"
+  from_ref="${2:-HEAD}"
+
+  if [[ -z "$branch" ]]; then
+    echo "Usage: newtree <branch-name> [<from-ref>]" >&2
+    return 2
+  fi
+
+  # Ensure we're inside a git repo
+  if ! repo_root="$(git rev-parse --show-toplevel 2>/dev/null)"; then
+    echo "Error: not inside a git repository." >&2
+    return 1
+  fi
+
+  repo_name="$(basename "$repo_root")"
+
+  # Sanitize the branch *for the path only* (keep original branch name for git)
+  sanitized="${branch//[\/-]/_}"
+  dest="$HOME/src/worktrees/$repo_name/$sanitized"
+  parent="$(dirname "$dest")"
+
+  # Create parent dir; git will create the final leaf
+  mkdir -p "$parent" || {
+    echo "Error: unable to create directory: $parent" >&2
+    return 1
+  }
+
+  # Optional: prune stale worktrees to avoid false conflicts
+  git -C "$repo_root" worktree prune >/dev/null 2>&1
+
+  # Does the branch already exist?
+  if git -C "$repo_root" rev-parse --verify --quiet "refs/heads/$branch" >/dev/null; then
+    echo "Branch '$branch' exists; adding worktree at: $dest"
+    # --force in case the branch is already checked out elsewhere
+    git -C "$repo_root" worktree add --force "$dest" "$branch" || return $?
+  else
+    echo "Branch '$branch' does not exist; creating from '$from_ref' at: $dest"
+    git -C "$repo_root" worktree add --force -b "$branch" "$dest" "$from_ref" || return $?
+  fi
+
+  # Jump into the new worktree
+  cd "$dest" || return $?
+  echo "✔ Worktree ready at: $dest"
+}
