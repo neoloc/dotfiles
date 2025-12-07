@@ -90,76 +90,156 @@ cmp.setup({
   },
 })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+-- LSP configuration using Neovim 0.11+ vim.lsp.config() API
+-- Note: Default keybindings and capabilities are automatically set
 
--- mason
+-- mason (for LSP server management)
 require("mason").setup()
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup({
+  automatic_installation = true,
+})
 
--- lspconfig
--- require('lspconfig')['gofumpt'].setup{}
--- require('lspconfig')['golines'].setup{}
--- require('lspconfig')['goimports'].setup{}
-require('lspconfig')['gopls'].setup{
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = {"gopls"},
-    filetypes = {"go", "gomod", "gowork", "dotmpl"},
-    settings = {
-      gopls = {
-        gofumpt = true,
-        completeUnimported = true,
-        usePlaceholders = true,
-        analyses = {
-          unusedparams = true,
-        },
+-- Go language server configuration
+vim.lsp.config('gopls', {
+  cmd = {"gopls"},
+  filetypes = {"go", "gomod", "gowork", "gotmpl"},
+  settings = {
+    gopls = {
+      gofumpt = true,
+      completeUnimported = true,
+      usePlaceholders = true,
+      analyses = {
+        unusedparams = true,
+        shadow = true,
+      },
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
       },
     },
-}
-require('lspconfig')['pyright'].setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  flags = lsp_flags,
-}
-require('lspconfig')['powershell_es'].setup{}
-require('lspconfig')['clangd'].setup{}
-require('lspconfig')['rust_analyzer'].setup{}
-require('lspconfig')['ansiblels'].setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-require('lspconfig')['bashls'].setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-require('lspconfig')['lua_ls'].setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
+  },
+})
+
+-- Python language server
+vim.lsp.config('pyright', {
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic",
+      },
+    },
+  },
+})
+
+-- PowerShell language server
+vim.lsp.config('powershell_es', {})
+
+-- C/C++ language server
+vim.lsp.config('clangd', {})
+
+-- Rust language server
+vim.lsp.config('rust_analyzer', {
+  settings = {
+    ["rust-analyzer"] = {
+      checkOnSave = {
+        command = "clippy",
+      },
+      inlayHints = {
+        enable = true,
+      },
+    },
+  },
+})
+
+-- -- Ansible language server
+-- vim.lsp.config('ansiblels', {})
+
+-- Bash language server
+vim.lsp.config('bashls', {})
+
+-- Lua language server
+vim.lsp.config('lua_ls', {
   settings = {
     Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
       diagnostics = {
-        globals = { 'vim', 'on_attach', 'lsp_flags'}
-      }
-    }
-  }
-}
-require('lspconfig')['yamlls'].setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    yaml = {
-      customTags = { '!vault'}
-    }
-  }
-}
-require('lspconfig')['intelephense'].setup{}
-require('lspconfig')['grammarly'].setup{}
-require('lspconfig')['puppet'].setup{}
-require('lspconfig')['terraformls'].setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+        globals = { 'vim' },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
+      },
+      telemetry = {
+        enable = false,
+      },
+      hint = {
+        enable = true,
+      },
+    },
+  },
+})
+
+-- vim.lsp.config('helm_ls', {
+--   settings = {
+--     ['helm-ls'] = {
+--       yamlls = {
+--         path = "yaml-language-server",
+--       }
+--     }
+--   }
+-- })
+
+-- -- YAML language server
+-- vim.lsp.config('yamlls', {
+--   settings = {
+--     yaml = {
+--       customTags = { '!vault' },
+--       schemas = {
+--         kubernetes = "*.yaml",
+--         ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+--         ["http://json.schemastore.org/ansible-playbook"] = "*play*.{yml,yaml}",
+--         ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+--         ["https://json.schemastore.org/gitlab-ci"] = "*gitlab-ci*.{yml,yaml}",
+--         ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
+--       },
+--     },
+--   },
+-- })
+
+-- PHP language server
+vim.lsp.config('intelephense', {})
+
+-- Grammar checking
+vim.lsp.config('grammarly', {})
+
+-- Puppet language server
+vim.lsp.config('puppet', {})
+
+-- Terraform language server
+vim.lsp.config('terraformls', {})
+
+-- Enable all configured language servers
+vim.lsp.enable('gopls')
+vim.lsp.enable('pyright')
+vim.lsp.enable('powershell_es')
+vim.lsp.enable('clangd')
+vim.lsp.enable('rust_analyzer')
+-- vim.lsp.enable('ansiblels')
+vim.lsp.enable('bashls')
+vim.lsp.enable('lua_ls')
+-- vim.lsp.enable('yamlls')
+-- vim.lsp.enable('helm_ls')
+vim.lsp.enable('intelephense')
+vim.lsp.enable('grammarly')
+vim.lsp.enable('puppet')
+vim.lsp.enable('terraformls')
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
   pattern = {"*.tf", "*.tfvars"},
   callback = function()

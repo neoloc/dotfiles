@@ -52,6 +52,7 @@ return require('packer').startup(function(use)
   use { 'rodjek/vim-puppet' }                        -- vim puppet enhancements
   use { 'jvirtanen/vim-hcl' }                        -- hcl syntax highlighting
 --  use { 'fatih/vim-go' }                             -- go-vim
+  use { 'qvalentin/helm-ls.nvim' }
 
 
   -- theme

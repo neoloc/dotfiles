@@ -299,15 +299,20 @@ bindsym $mod+r mode "resize"
 # monitor-mode settings
 # use "swaymsg -t get_outputs" to list outputs
 set $laptop eDP-1
-set $dell1 'Dell Inc. DELL U2713HM GK0KD357412L'
+set $dell1 'Dell Inc. DELL U4320Q D1QV193'
 set $dell2 'Dell Inc. DELL U2713HM GK0KD357413L'
 set $tv 'Samsung Electric Company SAMSUNG 0x01000E00'
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
 output $laptop resolution 1920x1080 position 0,0
-output $dell1 resolution 2560x1440@59.951Hz position 0,660 transform normal
-output $dell2 resolution 2560x1440@59.951Hz position 2560,0 transform 270
+output $dell1 resolution 3840x2160@59.997Hz position 0,660 transform normal
+output $dell2 resolution 2560x1440@59.951Hz position 3840,530 transform 270
 output $tv resolution 1920x1080@59.951Hz position 0,660 transform normal
+
+workspace $ws1 output $dell1
+workspace $ws2 output $dell2
+workspace $ws3 output $dell1
+workspace $ws4 output $dell2
 
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
